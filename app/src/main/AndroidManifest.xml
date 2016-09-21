@@ -4,10 +4,6 @@
     android:versionCode="2"
     android:versionName="14-11-13" >
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -35,7 +31,7 @@
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.mobiledatacaptator.activities.ProjectKiezer" />
+                android:value="be.mobiledatacaptator.activities.SelectProjectActivity" />
         </activity>
         <activity
             android:name="be.mobiledatacaptator.activities.FicheActivity"
@@ -43,7 +39,7 @@
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.mobiledatacaptator.activities.ProjectActivity" />
+                android:value="be.mobiledatacaptator.activities.SelectFicheActivity" />
         </activity>
         <activity android:name="be.mobiledatacaptator.dao.StartDropBoxApi" >
         </activity>
