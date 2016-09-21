@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*" >
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:layout_span="2">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:text="@string/selected_fiche" />
+
+            <EditText
+                android:id="@+id/editTextFicheName"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/button_white"
+                android:ems="10"
+                android:hint="@string/select_fiche"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/listViewFiches"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2" >
+        </ListView>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/buttonOpenFiche"
+            android:layout_width="@dimen/buttonOpenFiche"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/button_open_fiche" />
+
+        <Button
+            android:id="@+id/buttonAddNumber"
+            android:layout_width="@dimen/buttonAddNumber"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/button_increase_fiche" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/buttonOpenPhoto"
+            android:layout_width="@dimen/buttonOpenPhoto"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/button_open_photo" />
+
+        <Button
+            android:id="@+id/buttonOpenDrawing"
+            android:layout_width="@dimen/buttonOpenDrawing"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/button_open_drawing" />
+    </TableRow>
+
+</TableLayout>

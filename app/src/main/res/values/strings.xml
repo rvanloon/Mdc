@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dropbox instellingen voor SPC-account: -->
+    <string name="dropbox_location_projects">MobileDataCaptator/Projects.xml</string>
+
+
+    <!-- Dropbox instellingen voor MobileDataCaptator-account: -->
+<!--     <string name="dropbox_location_projects">DataCaptator/AppData/Projects.xml</string> -->
+
+    <!-- Algemeen -->
+    <string name="app_name">Mobile DataCaptator</string>
+    <string name="unknown_error">Niet nader omschreven fout</string>
+    <string name="ok">OK</string>
+
+    <!-- SelectProjectActivity -->
+    <string name="select_project">Selecteer een Project</string>
+    <string name="button_open_project">Open project</string>
+    <string name="select_project_first">Selecteer eerst een Project!</string>
+    <string name="VraagExportData">Wil u ALLE data op de Sd opslaan?</string>
+    <string name="exportLocatie">MDC_Dump</string>
+
+    <!-- SelectFicheActivity -->
+    <string name="project">Project:</string>
+    <string name="select_fiche">Selecteer een Fiche</string>
+    <string name="selected_fiche">Gekozen Fiche:</string>
+    <string name="button_open_fiche">Open Fiche</string>
+    <string name="button_open_photo">Open Foto</string>
+    <string name="button_open_drawing">Open Schets</string>
+    <string name="button_increase_fiche">+</string>
+    <string name="select_fiche_first">Selecteeer eerst een Fiche!</string>
+    <string name="button_yes">Ja</string>
+    <string name="button_no">Nee</string>
+    <string name="fiche">fiche</string>
+    <string name="do_you_want_to_open_fiche_x">Wil u fiche %1$s openen?</string>
+
+    <!-- FicheActivity -->
+    <string name="AddNew">Nieuwe Tab</string>
+    <string name="IdnForXmlAttr">idn</string>
+    <string name="LinkFout">Fout bij uitvoeren link.</string>
+    <string name="dialog_go">Sluiten</string>
+    <string name="dialog_cancel">Eerst oplossen</string>
+    <string name="ValVerplicht">Verplicht!</string>
+    <string name="ValTeLaag">Voldoet niet aan minimum</string>
+    <string name="ValTeHoog">Voldoet niet aan maximum</string>
+    <string name="TabExist">Tab bestaat reeds!</string>
+
+    <!-- TakePhotoActivity -->
+    <string name="enter_photo_name">Geef Foto-naam in</string>
+    <string name="button_take_photo">Neem Foto</string>
+    <string name="name_photo_required">Geef een Foto-naam in aub!</string>
+    <string name="free_suffix">Vrije suffix</string>
+    <string name="button_free_suffix">Vrije suffix</string>
+    <string name="button_display_photo">Open</string>
+    <string name="button_delete_photo">Verwijder</string>
+    <string name="delete_photo_">Foto Verwijderen?</string>
+    <string name="click_yes_to_delete_photo">Klik Ja om Foto %1$s te Verwijderen</string>
+    <string name="enter_suffix">Vul een Suffix in!</string>
+    <string name="select_photo_first">Selecteer eerst een Foto!</string>
+
+    <!-- DisplayPhotoActivity -->
+    <string name="display_photo">Getoonde Foto</string>
+    <string name="photo">Foto: </string>
+
+    <!-- DrawingActivity -->
+    <string name="button_draw_circle">Cirkel</string>
+    <string name="button_draw_line">Lijn</string>
+    <string name="button_draw_shape">Shape</string>
+    <string name="button_draw_shape_rotated">RShape</string>
+    <string name="button_draw_multi_line">PLine</string>
+    <string name="button_draw_multi_Shape">PShape</string>
+    <string name="button_draw_text">Tekst</string>
+    <string name="button_increase_character">+</string>
+    <string name="button_draw_undo">Undo</string>
+    <string name="checkbox_center">Center</string>
+    <string name="editTextInputText"></string>
+    <string name="enter_text">Geef een tekst in aub!</string>
+
+    <!-- Plugins -->
+    <string name="title_activity_plugin_leiding_verbinding">Leiding Verbinding</string>
+    <string name="kiesVerbinding">Kies verbinding</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

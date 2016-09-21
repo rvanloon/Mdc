@@ -1,0 +1,118 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="*" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:stretchColumns="*" >
+
+        <be.mobiledatacaptator.drawing_views.DrawingView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/drawingView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_span="4"
+            android:background="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="*" >
+
+        <Button
+            android:id="@+id/buttonDrawCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_draw_circle" />
+
+        <Button
+            android:id="@+id/buttonDrawLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_draw_line" />
+
+        <Button
+            android:id="@+id/buttonDrawShape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_draw_shape" />
+
+        <Button
+            android:id="@+id/buttonDrawMultiLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_draw_multi_line" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="*" >
+
+
+        <CheckBox
+            android:id="@+id/checkBoxCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_center" />
+
+        <Button
+            android:id="@+id/buttonDrawText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_draw_text" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2" >
+
+            <EditText
+                android:id="@+id/editTextInputText"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/editTextInputText"
+                android:imeOptions="actionDone" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/buttonNextChar"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_increase_character" />
+
+        </LinearLayout>
+        
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="*" >
+
+        <Spinner
+            android:id="@+id/spinnerLayerCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="3" />
+        
+        <Button
+            android:id="@+id/buttonDrawUndo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_draw_undo" />
+    </TableRow>
+
+</TableLayout>

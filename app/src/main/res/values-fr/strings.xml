@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Algemeen -->
+    <string name="app_name">Mobile DataCaptator</string>
+    <string name="dropbox_location_projects">DataCaptator/AppData/Projects.xml</string>
+    <string name="unknown_error">Erreur inconnue</string>
+    <string name="ok">OK</string>
+
+    <!-- SelectProjectActivity -->
+    <string name="select_project">Séleccionez un Projet </string>
+    <string name="button_open_project">Ouvrir projet</string>
+    <string name="select_project_first">Séleccionez d\'abord un projet!</string>
+
+    <!-- SelectFicheActivity -->
+    <string name="project">Projet:</string>
+    <string name="select_fiche">Séleccionez une Fiche</string>
+    <string name="selected_fiche">Fiche Choisie:</string>
+    <string name="button_open_fiche">Ouvrir Fiche</string>
+    <string name="button_open_photo">Ouvrir Photo</string>
+    <string name="button_open_drawing">Ouvrir Dessin</string>
+    <string name="button_increase_fiche">+</string>
+    <string name="select_fiche_first">Séleccionez d\'abord une fiche!</string>
+    <string name="button_yes">Oui</string>
+    <string name="button_no">Non</string>
+    <string name="fiche">Fiche</string>
+    <string name="do_you_want_to_open_fiche_x">Voulez-vous ouvrir fiche %1$s?</string>
+
+    <!-- FicheActivity -->
+    <string name="AddNew">Nouveau Tab</string>
+    <string name="IdnForXmlAttr">idn</string>
+    <string name="LinkFout">Fout bij uitvoeren link.</string>
+    <string name="dialog_go">Fermer</string>
+    <string name="dialog_cancel">D\'abord résoudre</string>
+    <string name="ValVerplicht">Obligé!</string>
+    <string name="ValTeLaag">Ne correspond pas au minimum</string>
+    <string name="ValTeHoog">Ne correspond pas au maximum</string>
+
+    <!-- TakePhotoActivity -->
+    <string name="enter_photo_name">Donnez photo-nom</string>
+    <string name="button_take_photo">Prenez Photo</string>
+    <string name="name_photo_required">Donnez un nom !</string>
+    <string name="free_suffix">Suffix libre</string>
+    <string name="button_free_suffix">Suffix libre</string>
+    <string name="button_display_photo">Ouvrir</string>
+    <string name="button_delete_photo">Eraser</string>
+    <string name="delete_photo_">Eraser la photo?</string>
+    <string name="click_yes_to_delete_photo">Clickez Oui pour éraser la photo %1$s</string>
+    <string name="enter_suffix">Entrez le suffix!</string>
+    <string name="select_photo_first">Sélecionnez d\'abord une photo!</string>
+
+    <!-- DisplayPhotoActivity -->
+    <string name="display_photo">Photo </string>
+    <string name="photo">Photo: </string>
+
+    <!-- DrawingActivity -->
+    <string name="button_draw_circle">Cercle</string>
+    <string name="button_draw_line">Line</string>
+    <string name="button_draw_shape">Shape</string>
+    <string name="button_draw_multi_line">Polyline</string>
+    <string name="button_draw_text">Texte</string>
+    <string name="button_increase_character">+</string>
+    <string name="button_draw_undo">Undo</string>
+    <string name="checkbox_center">Centrer</string>
+    <string name="editTextInputText"></string>
+    <string name="enter_text">Entrez le Texte!</string>
+
+    <!-- Plugins -->
+    <string name="title_activity_plugin_leiding_verbinding">Connection Pipeline</string>
+    <string name="kiesVerbinding">Choississez la Connection</string>
+    <string name="cancel">Cancel</string>
+
+</resources>
