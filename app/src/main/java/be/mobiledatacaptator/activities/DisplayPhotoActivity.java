@@ -1,6 +1,5 @@
 package be.mobiledatacaptator.activities;
 
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
