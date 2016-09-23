@@ -26,7 +26,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
 import be.mobiledatacaptator.R;
+import be.mobiledatacaptator.dao.InitLocalFilesystemActivity;
 import be.mobiledatacaptator.dao.StartDropBoxApi;
 import be.mobiledatacaptator.model.Project;
 import be.mobiledatacaptator.model.UnitOfWork;
@@ -35,202 +37,209 @@ import be.mobiledatacaptator.utilities.MdcUtil;
 
 public class SelectProjectActivity extends Activity {
 
-	public final static int REQUEST_INITDROPBOX = 1;
+    public final static int REQUEST_INITDROPBOX = 1;
+    public final static int REQUEST_INITLOCALFILESYSTEM = 2;
 
-	private UnitOfWork unitOfWork;
-	private ListView listViewProjects;
-	private Button buttonOpenProject = null;
+    private UnitOfWork unitOfWork;
+    private ListView listViewProjects;
+    private Button buttonOpenProject = null;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		try {
-			// Hier wordt de dropboxapi gestart.
-			Intent intent = new Intent(this, StartDropBoxApi.class);
-			startActivityForResult(intent, REQUEST_INITDROPBOX);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        try {
+            // Hier wordt de dropboxapi gestart.
+//            Intent intent = new Intent(this, StartDropBoxApi.class);
+//            startActivityForResult(intent, REQUEST_INITDROPBOX);
 
-		} catch (Exception e) {
-			MdcExceptionLogger.error(e, this);
-		}
-	}
+            // Hier wordt de LocalFileSystem gestart.
+            Intent intent = new Intent(this, InitLocalFilesystemActivity.class);
+            startActivityForResult(intent, REQUEST_INITLOCALFILESYSTEM);
 
-	private void start() {
-		try {
-			unitOfWork = UnitOfWork.getInstance();
+        } catch (Exception e) {
+            MdcExceptionLogger.error(e, this);
+        }
+    }
 
-			setTitle(getString(R.string.select_project));
+    private void start() {
+        try {
+            unitOfWork = UnitOfWork.getInstance();
 
-			setContentView(R.layout.activity_select_project);
+            setTitle(getString(R.string.select_project));
 
-			listViewProjects = (ListView) findViewById(R.id.listViewProjects);
-			buttonOpenProject = (Button) findViewById(R.id.buttonOpenProject);
+            setContentView(R.layout.activity_select_project);
 
-			loadProjects();
-			unitOfWork.setActiveProject(null);
+            listViewProjects = (ListView) findViewById(R.id.listViewProjects);
+            buttonOpenProject = (Button) findViewById(R.id.buttonOpenProject);
 
-			listViewProjects.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int indexListItem, long arg3) {
+            loadProjects();
+            unitOfWork.setActiveProject(null);
 
-					try {
-						UnitOfWork.getInstance().setActiveProject(
-								(Project) listViewProjects
-										.getItemAtPosition(indexListItem));
-					} catch (Exception e) {
-						MdcExceptionLogger.error(e, SelectProjectActivity.this);
-					}
-				}
-			});
+            listViewProjects.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1,
+                                        int indexListItem, long arg3) {
 
-			listViewProjects
-					.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-						@Override
-						public boolean onItemLongClick(AdapterView<?> parent,
-								View view, int indexListItem, long id) {
-							try {
+                    try {
+                        UnitOfWork.getInstance().setActiveProject(
+                                (Project) listViewProjects
+                                        .getItemAtPosition(indexListItem));
+                    } catch (Exception e) {
+                        MdcExceptionLogger.error(e, SelectProjectActivity.this);
+                    }
+                }
+            });
 
-								listViewProjects.performItemClick(
-										listViewProjects.getAdapter().getView(
-												indexListItem, null, null),
-										indexListItem,
-										listViewProjects.getAdapter()
-												.getItemId(indexListItem));
+            listViewProjects
+                    .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent,
+                                                       View view, int indexListItem, long id) {
+                            try {
 
-								saveProjectData();
-							} catch (Exception e) {
-								MdcExceptionLogger.error(e,
-										SelectProjectActivity.this);
-							}
-							return true;
-						}
-					});
+                                listViewProjects.performItemClick(
+                                        listViewProjects.getAdapter().getView(
+                                                indexListItem, null, null),
+                                        indexListItem,
+                                        listViewProjects.getAdapter()
+                                                .getItemId(indexListItem));
 
-			buttonOpenProject.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View button) {
-					try {
-						if (UnitOfWork.getInstance().getActiveProject() != null) {
-							Intent intent = new Intent(button.getContext(),
-									SelectFicheActivity.class);
-							startActivity(intent);
+                                saveProjectData();
+                            } catch (Exception e) {
+                                MdcExceptionLogger.error(e,
+                                        SelectProjectActivity.this);
+                            }
+                            return true;
+                        }
+                    });
 
-						} else {
-							MdcUtil.showToastShort(
-									getString(R.string.select_project_first),
-									getApplicationContext());
-						}
-					} catch (Exception e) {
-						MdcExceptionLogger.error(e, SelectProjectActivity.this);
-					}
-				}
-			});
-		} catch (Exception e) {
-			MdcExceptionLogger.error(e, this);
-		}
-	}
+            buttonOpenProject.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View button) {
+                    try {
+                        if (UnitOfWork.getInstance().getActiveProject() != null) {
+                            Intent intent = new Intent(button.getContext(),
+                                    SelectFicheActivity.class);
+                            startActivity(intent);
 
-	private void loadProjects() {
-		try {
-			ArrayList<Project> projects = new ArrayList<Project>();
+                        } else {
+                            MdcUtil.showToastShort(
+                                    getString(R.string.select_project_first),
+                                    getApplicationContext());
+                        }
+                    } catch (Exception e) {
+                        MdcExceptionLogger.error(e, SelectProjectActivity.this);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            MdcExceptionLogger.error(e, this);
+        }
+    }
 
-			String xml = unitOfWork.getDao().getFilecontent(
-					getString(R.string.dropbox_location_projects));
-			DocumentBuilder db = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder();
-			Document dom = db.parse(new ByteArrayInputStream(xml.getBytes()));
+    private void loadProjects() {
+        try {
+            ArrayList<Project> projects = new ArrayList<Project>();
 
-			Element root = dom.getDocumentElement();
-			NodeList forms = root.getElementsByTagName("Project");
-			for (int i = 0; i < forms.getLength(); i++) {
-				Project myProject = new Project();
-				Node projectNode = forms.item(i);
+            String xml = unitOfWork.getDao().getFilecontent(
+                    getString(R.string.dropbox_location_projects));
+            DocumentBuilder db = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder();
+            Document dom = db.parse(new ByteArrayInputStream(xml.getBytes()));
 
-				myProject.setName(projectNode.getAttributes()
-						.getNamedItem("Name").getNodeValue());
-				myProject.setTemplate(projectNode.getAttributes()
-						.getNamedItem("Template").getNodeValue());
+            Element root = dom.getDocumentElement();
+            NodeList forms = root.getElementsByTagName("Project");
+            for (int i = 0; i < forms.getLength(); i++) {
+                Project myProject = new Project();
+                Node projectNode = forms.item(i);
 
-				projects.add(myProject);
-			}
+                myProject.setName(projectNode.getAttributes()
+                        .getNamedItem("Name").getNodeValue());
+                myProject.setTemplate(projectNode.getAttributes()
+                        .getNamedItem("Template").getNodeValue());
 
-			ArrayAdapter<Project> myAdapter = new ArrayAdapter<Project>(this,
-					android.R.layout.simple_list_item_activated_1, projects);
+                projects.add(myProject);
+            }
 
-			listViewProjects.setAdapter(myAdapter);
-			listViewProjects.setItemsCanFocus(true);
-			listViewProjects.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+            ArrayAdapter<Project> myAdapter = new ArrayAdapter<Project>(this,
+                    android.R.layout.simple_list_item_activated_1, projects);
 
-		} catch (Exception e) {
-			MdcExceptionLogger.error(e, this);
-		}
-	}
+            listViewProjects.setAdapter(myAdapter);
+            listViewProjects.setItemsCanFocus(true);
+            listViewProjects.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
-	private void saveProjectData() {
-		try {
-			if (isExternalStorageWritable()
-					&& unitOfWork.getActiveProject() != null) {
-				//
-				final Context ctxt = this;
-				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						switch (which) {
-						case DialogInterface.BUTTON_POSITIVE:
-							try {
-								UnitOfWork.getInstance().getDao().dumpToSd();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							break;
+        } catch (Exception e) {
+            MdcExceptionLogger.error(e, this);
+        }
+    }
 
-						case DialogInterface.BUTTON_NEGATIVE:
-							break;
-						}
-					}
-				};
+    private void saveProjectData() {
+        try {
+            if (isExternalStorageWritable()
+                    && unitOfWork.getActiveProject() != null) {
+                //
+                final Context ctxt = this;
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                try {
+                                    UnitOfWork.getInstance().getDao().dumpToSd();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
 
-				String builderMessage = getString(R.string.VraagExportData);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-				builder.setNegativeButton(R.string.button_no,
-						dialogClickListener)
-						.setMessage(builderMessage)
-						.setPositiveButton(R.string.button_yes,
-								dialogClickListener).show();
+                String builderMessage = getString(R.string.VraagExportData);
 
-			}
-		} catch (Exception e) {
-			MdcExceptionLogger.error(e, SelectProjectActivity.this);
-		}
-	}
+                builder.setNegativeButton(R.string.button_no,
+                        dialogClickListener)
+                        .setMessage(builderMessage)
+                        .setPositiveButton(R.string.button_yes,
+                                dialogClickListener).show();
 
-	/* Checks if external storage is available for read and write */
-	public boolean isExternalStorageWritable() {
-		String state = Environment.getExternalStorageState();
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-			return true;
-		}
-		return false;
-	}
+            }
+        } catch (Exception e) {
+            MdcExceptionLogger.error(e, SelectProjectActivity.this);
+        }
+    }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		try {
-			if (requestCode == REQUEST_INITDROPBOX) {
-				start();
-			} else {
-				super.onActivityResult(requestCode, resultCode, data);
-			}
-		} catch (Exception e) {
-			MdcExceptionLogger.error(e, this);
-		}
-	}
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            if (requestCode == REQUEST_INITDROPBOX) {
+                start();
+            } else if (requestCode == REQUEST_INITLOCALFILESYSTEM) {
+                start();
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+        } catch (Exception e) {
+            MdcExceptionLogger.error(e, this);
+        }
+    }
 
 }

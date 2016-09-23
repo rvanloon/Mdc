@@ -1,6 +1,7 @@
 package be.mobiledatacaptator.dao;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,7 @@ import java.util.List;
 
 public class LocalFileSystemDao implements IMdcDao {
 
-    private String rootPath = "";
+    private String rootPath = Environment.getExternalStorageDirectory().getPath();
 
     private String getFullPath(String path) {
         int numberSlashes = 0;
@@ -39,7 +41,7 @@ public class LocalFileSystemDao implements IMdcDao {
         } else if (numberSlashes == 2) {
             return rootPath.substring(0, rootPath.length() - 1) + path;
         } else {
-            return null;
+            return rootPath + path;
         }
     }
 
@@ -82,8 +84,10 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public void saveFile(String path, File file) throws Exception {
+        File outFile  = new File(path);
+        outFile.createNewFile();
         InputStream inputStream = new FileInputStream(file);
-        OutputStream outputStream = new FileOutputStream(path);
+        OutputStream outputStream = new FileOutputStream(outFile);
 
         byte[] buf = new byte[1024];
         int len;
@@ -96,17 +100,32 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public void saveStringToFile(String path, String string) throws Exception {
-
+        File file = new File(path);
+        file.createNewFile();
+        FileOutputStream fileOutputStream = new FileOutputStream(file,false);
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+        outputStreamWriter.write(string);
+        outputStreamWriter.flush();
+        outputStreamWriter.close();
+        fileOutputStream.close();
     }
 
     @Override
     public void appendStringToFile(String path, String string) throws Exception {
-
+        File file = new File(path);
+        file.createNewFile();
+        FileOutputStream fileOutputStream = new FileOutputStream(file,true);
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+        outputStreamWriter.append(string);
+        outputStreamWriter.flush();
+        outputStreamWriter.close();
+        fileOutputStream.close();
     }
 
     @Override
     public Bitmap getBitmapFromFile(String path) throws Exception {
-        return null;
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        return bitmap;
     }
 
     @Override

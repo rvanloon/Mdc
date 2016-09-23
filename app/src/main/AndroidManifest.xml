@@ -43,6 +43,7 @@
         </activity>
         <activity android:name="be.mobiledatacaptator.dao.StartDropBoxApi" >
         </activity>
+        <activity android:name=".dao.InitLocalFilesystemActivity"/>
         <activity
             android:name="be.mobiledatacaptator.activities.TakePhotoActivity"
             android:parentActivityName="be.mobiledatacaptator.activities.SelectFicheActivity"

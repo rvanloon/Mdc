@@ -2,6 +2,7 @@ package be.mobiledatacaptator.model;
 
 import be.mobiledatacaptator.dao.DropBoxDao;
 import be.mobiledatacaptator.dao.IMdcDao;
+import be.mobiledatacaptator.dao.LocalFileSystemDao;
 
 public class UnitOfWork {
 
@@ -17,7 +18,8 @@ public class UnitOfWork {
 	public static UnitOfWork getInstance() {
 		if (instance == null) {
 			instance = new UnitOfWork();
-			dao = new DropBoxDao();
+			//dao = new DropBoxDao();
+			dao = new LocalFileSystemDao();
 		}
 		return instance;
 	}
