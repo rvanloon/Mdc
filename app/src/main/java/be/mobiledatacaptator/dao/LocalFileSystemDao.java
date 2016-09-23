@@ -84,15 +84,15 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public void saveFile(String path, File file) throws Exception {
-        File outFile  = new File(getFullPath(path));
+        File outFile = new File(getFullPath(path));
         outFile.createNewFile();
         InputStream inputStream = new FileInputStream(file);
         OutputStream outputStream = new FileOutputStream(outFile);
 
         byte[] buf = new byte[1024];
         int len;
-        while ((len = inputStream.read(buf))>0){
-            outputStream.write(buf,0,len);
+        while ((len = inputStream.read(buf)) > 0) {
+            outputStream.write(buf, 0, len);
         }
         inputStream.close();
         outputStream.close();
@@ -102,7 +102,7 @@ public class LocalFileSystemDao implements IMdcDao {
     public void saveStringToFile(String path, String string) throws Exception {
         File file = new File(getFullPath(path));
         file.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(file,false);
+        FileOutputStream fileOutputStream = new FileOutputStream(file, false);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
         outputStreamWriter.write(string);
         outputStreamWriter.flush();
@@ -114,7 +114,7 @@ public class LocalFileSystemDao implements IMdcDao {
     public void appendStringToFile(String path, String string) throws Exception {
         File file = new File(getFullPath(path));
         file.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(file,true);
+        FileOutputStream fileOutputStream = new FileOutputStream(file, true);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
         outputStreamWriter.append(string);
         outputStreamWriter.flush();

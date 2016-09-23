@@ -56,7 +56,7 @@ public class InitLocalFilesystemActivity extends Activity {
         if (requestCode == REQUEST_EXTERNAL_STORAGE) {
             ckeckIfPathExists();
         } else {
-            super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
