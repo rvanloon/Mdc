@@ -2,7 +2,6 @@ package be.mobiledatacaptator.dao;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,14 +19,14 @@ import be.mobiledatacaptator.utilities.MdcUtil;
 public class InitLocalFilesystemActivity extends Activity {
 
     // Storage Permissions
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
+    private final int REQUEST_EXTERNAL_STORAGE = 1;
+    private String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
 
-    public static void verifyStoragePermissions(Activity activity) {
+    private void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
@@ -38,38 +37,40 @@ public class InitLocalFilesystemActivity extends Activity {
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
             );
+        } else {
+            finish();
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         verifyStoragePermissions(this);
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_EXTERNAL_STORAGE){
-            ckeckIfPathExists(data);
-        }else {
-            super.onActivityResult(requestCode, resultCode, data);
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+
+        if (requestCode == REQUEST_EXTERNAL_STORAGE) {
+            ckeckIfPathExists();
+        } else {
+            super.onRequestPermissionsResult(requestCode,permissions,grantResults);
         }
     }
 
-    private void ckeckIfPathExists(Intent data){
+    private void ckeckIfPathExists() {
         String msg = "Zorg dat volgend path bestaat:\r\n";
         msg += Environment.getExternalStorageDirectory() + getString(R.string.dropbox_location_projects);
 
         try {
-            if (!(UnitOfWork.getInstance().getDao().existsFile(getString(R.string.dropbox_location_projects)))){
+            if (!(UnitOfWork.getInstance().getDao().existsFile(getString(R.string.dropbox_location_projects)))) {
                 throw new Exception(msg);
             }
             finish();
-        }catch (Exception e){
-            data.putExtra("msg",msg);
-            MdcUtil.showToastLong(msg,this);
+        } catch (Exception e) {
+            MdcUtil.showToastLong(msg, this);
             MdcExceptionLogger.error(e, this);
             finish();
         }

@@ -60,7 +60,7 @@ public class LocalFileSystemDao implements IMdcDao {
     @Override
     public List<String> getAllFilesFromPathWithExtension(String path, String extension, Boolean returnExtension) throws Exception {
         List<String> folderContent = new ArrayList<>();
-        File[] rawFiles = new File(path).listFiles();
+        File[] rawFiles = new File(getFullPath(path)).listFiles();
         for (File f : rawFiles) {
             String fileName = f.getName();
             if (fileName.endsWith(extension)) {
@@ -73,18 +73,18 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public boolean existsFile(String path) throws Exception {
-        return new File(path).exists();
+        return new File(getFullPath(path)).exists();
     }
 
     @Override
     public void delete(String path) throws Exception {
-        File file = new File(path);
+        File file = new File(getFullPath(path));
         file.delete();
     }
 
     @Override
     public void saveFile(String path, File file) throws Exception {
-        File outFile  = new File(path);
+        File outFile  = new File(getFullPath(path));
         outFile.createNewFile();
         InputStream inputStream = new FileInputStream(file);
         OutputStream outputStream = new FileOutputStream(outFile);
@@ -100,7 +100,7 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public void saveStringToFile(String path, String string) throws Exception {
-        File file = new File(path);
+        File file = new File(getFullPath(path));
         file.createNewFile();
         FileOutputStream fileOutputStream = new FileOutputStream(file,false);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
@@ -112,7 +112,7 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public void appendStringToFile(String path, String string) throws Exception {
-        File file = new File(path);
+        File file = new File(getFullPath(path));
         file.createNewFile();
         FileOutputStream fileOutputStream = new FileOutputStream(file,true);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
@@ -124,7 +124,7 @@ public class LocalFileSystemDao implements IMdcDao {
 
     @Override
     public Bitmap getBitmapFromFile(String path) throws Exception {
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        Bitmap bitmap = BitmapFactory.decodeFile(getFullPath(path));
         return bitmap;
     }
 
